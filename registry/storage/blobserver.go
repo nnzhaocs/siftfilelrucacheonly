@@ -558,22 +558,22 @@ func (bs *blobServer) ServeBlob(ctx context.Context, w http.ResponseWriter, r *h
 	}
 
 	//check if its in disk cache
-	bss, err := bs.cache.Dc.Get(dgst.String())
-	if err != nil {
-		context.GetLogger(ctx).Errorf("NANNAN: serveblob: disk cache error: %v: %s", err, dgst.String())
-	} else {
-		//bytesreader := bytes.NewReader(bss)
-		if bss != nil {
-			context.GetLogger(ctx).Debug("NANNAN: slice cache hit")
-			DurationNTT, size, err := bs.serveBlobCache(ctx, _desc, w, r, bss)
-			if err != nil {
-				return err
-			}
-			context.GetLogger(ctx).Debugf("NANNAN: slice cache hit: metadata lookup time: %v, layer transfer time: %v, layer size: %v",
-				DurationML, DurationNTT, size)
-			return nil
-		}
-	}
+//	bss, err := bs.cache.Dc.Get(dgst.String())
+//	if err != nil {
+//		context.GetLogger(ctx).Errorf("NANNAN: serveblob: disk cache error: %v: %s", err, dgst.String())
+//	} else {
+//		//bytesreader := bytes.NewReader(bss)
+//		if bss != nil {
+//			context.GetLogger(ctx).Debug("NANNAN: slice cache hit")
+//			DurationNTT, size, err := bs.serveBlobCache(ctx, _desc, w, r, bss)
+//			if err != nil {
+//				return err
+//			}
+//			context.GetLogger(ctx).Debugf("NANNAN: slice cache hit: metadata lookup time: %v, layer transfer time: %v, layer size: %v",
+//				DurationML, DurationNTT, size)
+//			return nil
+//		}
+//	}
 	//otherwise restore slice
 	context.GetLogger(ctx).Debug("NANNAN: slice cache miss")
 
@@ -592,19 +592,19 @@ func (bs *blobServer) ServeBlob(ctx context.Context, w http.ResponseWriter, r *h
 		return err
 	}
 
-	bfss, err := ioutil.ReadFile(packFileName)
-	if err != nil {
-		context.GetLogger(ctx).Errorf("NANNAN: %s ", err)
-	}
-	context.GetLogger(ctx).Debugf("NANNAN: slice cache put: %v B for %s", len(bfss), dgst.String())
-
-	if len(bfss) > 0 {
-		//err = bs.cache.Dc.Put(dgst.String(), bfss)
-		err = bs.cache.Dc.Set(dgst.String(), bfss)
-		if err != nil {
-			context.GetLogger(ctx).Debugf("NANNAN: slice cache cannot write to digest: %v: %v ", dgst.String(), err)
-		}
-	}
+//	bfss, err := ioutil.ReadFile(packFileName)
+//	if err != nil {
+//		context.GetLogger(ctx).Errorf("NANNAN: %s ", err)
+//	}
+//	context.GetLogger(ctx).Debugf("NANNAN: slice cache put: %v B for %s", len(bfss), dgst.String())
+//
+//	if len(bfss) > 0 {
+//		//err = bs.cache.Dc.Put(dgst.String(), bfss)
+//		err = bs.cache.Dc.Set(dgst.String(), bfss)
+//		if err != nil {
+//			context.GetLogger(ctx).Debugf("NANNAN: slice cache cannot write to digest: %v: %v ", dgst.String(), err)
+//		}
+//	}
 
 	//delete tmp_dir and packFile here
 	if err = os.RemoveAll(path.Join("/var/lib/registry", "/docker/registry/v2/pull_tars/pull_tmp_tarfile", tmp_dir)); err != nil {
