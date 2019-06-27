@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/allegro/bigcache"
+	//"github.com/allegro/bigcache"
 	"github.com/docker/distribution"
 	"github.com/docker/distribution/context"
 	storagedriver "github.com/docker/distribution/registry/storage/driver"
@@ -593,23 +593,23 @@ func (bw *blobWriter) Dedup(ctx context.Context, desc distribution.Descriptor) e
 	var fcnt int64 = 0
 
 	// put this layer into cache
-//	_, err = bw.blobStore.registry.blobServer.cache.Dc.Get(desc.Digest.String())
-//	if err == bigcache.ErrEntryNotFound {
-//		context.GetLogger(ctx).Errorf("NANNAN: dedup: diskcache error: %v: %s", err, desc.Digest.String())
-//		//	}else{
-//		//		if bss == nil {
-//		bfss, err := ioutil.ReadFile(layerPath)
-//		if err != nil {
-//			context.GetLogger(ctx).Errorf("NANNAN: %s ", err)
-//		}
-//		context.GetLogger(ctx).Debugf("NANNAN: slice cache put: %v B for %s", len(bfss), desc.Digest.String())
-//		if len(bfss) > 0 {
-//			err = bw.blobStore.registry.blobServer.cache.Dc.Set(desc.Digest.String(), bfss)
-//			if err != nil {
-//				context.GetLogger(ctx).Debugf("NANNAN: slice cache cannot write to: digest: %v: %v ", desc.Digest.String(), err)
-//			}
-//		}
-//	}
+	//	_, err = bw.blobStore.registry.blobServer.cache.Dc.Get(desc.Digest.String())
+	//	if err == bigcache.ErrEntryNotFound {
+	//		context.GetLogger(ctx).Errorf("NANNAN: dedup: diskcache error: %v: %s", err, desc.Digest.String())
+	//		//	}else{
+	//		//		if bss == nil {
+	//		bfss, err := ioutil.ReadFile(layerPath)
+	//		if err != nil {
+	//			context.GetLogger(ctx).Errorf("NANNAN: %s ", err)
+	//		}
+	//		context.GetLogger(ctx).Debugf("NANNAN: slice cache put: %v B for %s", len(bfss), desc.Digest.String())
+	//		if len(bfss) > 0 {
+	//			err = bw.blobStore.registry.blobServer.cache.Dc.Set(desc.Digest.String(), bfss)
+	//			if err != nil {
+	//				context.GetLogger(ctx).Debugf("NANNAN: slice cache cannot write to: digest: %v: %v ", desc.Digest.String(), err)
+	//			}
+	//		}
+	//	}
 	//	}
 	//	else {
 	//		defer bytesreader.Close()
