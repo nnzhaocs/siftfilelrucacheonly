@@ -212,7 +212,7 @@ func mvFile(i interface{}) {
 				context.GetLogger(ctx).Debugf("NANNAN: file cache put: %v B for %s", len(bfss), newsrc)
 				if len(bfss) > 0 {
 					//err = bs.cache.Dc.Put(dgst.String(), bfss)
-					err = bs.cache.Dc.Set(newsrc, bfss)
+					err = bs.cache.Mc.Set(newsrc, bfss)
 					if err != nil {
 						context.GetLogger(ctx).Debugf("NANNAN: file cache cannot write to digest: %v: %v ", newsrc, err)
 					}
